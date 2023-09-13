@@ -1,4 +1,4 @@
-import {  useTitle } from "../hooks";
+import {  useTitle } from "../../hooks";
 
 export const HomePage = ({ title }) => {
     useTitle(title);
