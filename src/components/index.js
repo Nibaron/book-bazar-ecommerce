@@ -1,2 +1,4 @@
-export { Header } from "./Header";
-export { Footer } from "./Footer";
+export{ Button } from "./Elements/Button";
+
+export{ Header } from "./Layouts/Header";
+export{ Footer } from "./Layouts/Footer";
