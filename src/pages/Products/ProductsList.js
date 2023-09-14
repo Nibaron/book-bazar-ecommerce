@@ -3,14 +3,16 @@ import { useLocation } from "react-router-dom";
 
 import { ProductCard } from "../../components";
 import { FilterBar } from "./components/FilterBar";
+import { useTitle } from "../../hooks";
 
 
-export const ProductsList = () => {
+export const ProductsList = ({title}) => {
 
     const [show, setShow] = useState(false);
     const [products, setProducts] = useState([]);
     const search = useLocation().search;
     const searchTerm = new URLSearchParams(search).get("q");
+    useTitle(title);
 
     useEffect(() => {
         async function fetchProducts() {
