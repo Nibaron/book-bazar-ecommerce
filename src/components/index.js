@@ -8,4 +8,6 @@ export{ Footer } from "./Layouts/Footer";
 
 export { ScrollToTop } from "./Other/ScrollToTop";
 
+export { Search } from "./Sections/Search";
+
 
