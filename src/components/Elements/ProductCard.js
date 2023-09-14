@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { Rating } from "./Rating";
 
 export const ProductCard = ({ product }) => {
-    console.log("Product:", product);
     const { id, name, overview, price, poster, rating, best_seller } = product;
     return (
         <div className="m-3 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
