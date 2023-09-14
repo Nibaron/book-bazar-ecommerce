@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
-import { ProductCard } from "../../components/Elements/ProductCard";
+
+import { ProductCard } from "../../components";
 import { FilterBar } from "./components/FilterBar";
 
 export const ProductsList = () => {
+
     const [show, setShow] = useState(false);
     const [products, setProducts] = useState([]);
+
     useEffect(() => {
         async function fetchProducts() {
             const response = await fetch("http://localhost:8000/products");
@@ -13,6 +16,7 @@ export const ProductsList = () => {
         }
         fetchProducts();
     }, []);
+
     return (
         <main>
             <section className="my-5">
@@ -42,11 +46,14 @@ export const ProductsList = () => {
                 </div>
 
                 <div className="flex flex-wrap justify-center lg:flex-row">
+                    
                     {products.map((product) => (
                         <ProductCard key={product.id} product={product} />
                     ))}
+                    
                 </div>
             </section>
+
             {show && <FilterBar setShow={setShow} />}
         </main>
     );
