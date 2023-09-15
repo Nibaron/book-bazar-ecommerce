@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import { useTitle } from "../hooks";
+import { toast } from "react-toastify";
 
 export const Register = () => {
     useTitle("register");
+    const navigate= useNavigate();
 
     async function handleregister(event){
         event.preventDefault();
@@ -18,7 +21,7 @@ export const Register = () => {
         });
 
         const data= await response.json();
-        console.log(data);
+        data.accessToken ? navigate("/products"):toast.error(data);
     }
     return (
         <main>
