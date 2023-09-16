@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 
-export const DropdownLoggedIn = () => {
+export const DropdownLoggedIn = ({setDropdown}) => {
     const name= JSON.parse(sessionStorage.getItem("userName"));
     const navigate=useNavigate();
     const handleDropdownLoggedIn=()=>{
         sessionStorage.clear();
-
+        setDropdown(false);
         navigate("/");
     }
 
@@ -23,6 +23,7 @@ export const DropdownLoggedIn = () => {
             >
                 <li>
                     <Link
+                        onClick={()=>(setDropdown(false))}
                         to="/products"
                         className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
@@ -31,6 +32,7 @@ export const DropdownLoggedIn = () => {
                 </li>
                 <li>
                     <Link
+                        onClick={()=>(setDropdown(false))}
                         to="/dashboard"
                         className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
