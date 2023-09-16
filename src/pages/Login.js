@@ -1,7 +1,39 @@
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 import { useTitle } from "../hooks";
 
 export const Login = () => {
+    const email   = useRef();
+    const password= useRef();
     useTitle("Login");
+    const navigate= useNavigate();
+
+    async function handleLoginSubmit(event){
+        event.preventDefault();
+
+        const authDetail={
+            email: email.current.value,
+            password: password.current.value
+        }
+
+        const requestOptions={
+                method: "POST",
+                headers: {"content-type": "application/json"},
+                body: JSON.stringify(authDetail)
+        }
+        const response= await fetch("http://localhost:8000/login",requestOptions);
+        const data = await response.json();
+        console.log(data);
+        data.accessToken ? navigate("/products"):toast.error(data);
+
+        if(data.accessToken){
+            sessionStorage.setItem("token",JSON.stringify(data.accessToken));
+            sessionStorage.setItem("userID",JSON.stringify(data.user.id));
+            sessionStorage.setItem("userName",JSON.stringify(data.user.name));
+        }
+    }
 
     return (
         <main>
@@ -10,7 +42,7 @@ export const Login = () => {
                     Login
                 </p>
             </section>
-            <form>
+            <form onSubmit={handleLoginSubmit}>
                 <div className="mb-6">
                     <label
                         htmlFor="email"
@@ -21,6 +53,7 @@ export const Login = () => {
                     <input
                         type="email"
                         id="email"
+                        ref={email}
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="user@example.com"
                         required
@@ -37,6 +70,7 @@ export const Login = () => {
                     <input
                         type="password"
                         id="password"
+                        ref={password}
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required
                     />

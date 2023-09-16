@@ -289,6 +289,12 @@
       "password": "$2a$10$oRgOYkrpgFZjhOjzLLEyrOiSecFqCNlJsfHdiOkJr6y/QnQsObjAm",
       "name": "Nibaron Kumar",
       "id": 2
+    },
+    {
+      "email": "user@example.com",
+      "password": "$2a$10$yBuZC53IHcGDFuYyO/IsJOrO.Qagv/iV04whXvWqGvgLQ54cpz49C",
+      "name": "user",
+      "id": 3
     }
   ]
 }
