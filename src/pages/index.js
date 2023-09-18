@@ -10,5 +10,9 @@ export { CartList } from "./Cart/components/CartList";
 export { Checkout } from "./Cart/components/Checkout";
 export { CartPage } from "./Cart/CartPage";
 
+export { OrderSuccess } from "./Order/components/OrderSuccess";
+export { OrderFail } from "./Order/components/Orderfail";
+export { OrderPage } from "./Order/OrderPage";
+
 export { ProductDetail } from "./ProductDetail";
 export { PageNotFound } from "./PageNotFound";

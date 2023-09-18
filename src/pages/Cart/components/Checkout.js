@@ -32,8 +32,8 @@ export const Checkout = ({ setCheckout }) => {
             amount_paid: total,
             quantity: cartList.length,
             user:{
-                name: event.target.name.value,
-                email: event.target.email.value,
+                name: user.name,
+                email: user.email,
                 id: userID
             }
         }
@@ -45,7 +45,7 @@ export const Checkout = ({ setCheckout }) => {
         });
         const data= await response.json();
         clearCart();
-        navigate("/");
+        navigate("/order-summary" ,{state: {status: true, data: data }});
       }
 
 
