@@ -1,7 +1,54 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { useCart } from "../../../context";
 
 export const Checkout = ({ setCheckout }) => {
-    const  {total}=useCart();
+    const  {cartList, total, clearCart}=useCart();
+    const navigate= useNavigate();
+    const [user, setUser] = useState({});
+    const token = JSON.parse(sessionStorage.getItem("token"));
+    const userID= JSON.parse(sessionStorage.getItem("userID"));
+
+
+    useEffect(()=>{
+        
+        async function getUser(){
+            const response= await fetch(`http://localhost:8000/600/users/${userID}`,
+            {
+                method:"GET",
+                headers: {"Content-Type":"application/json", Authorization:`Bearer ${token}`},
+            });
+            const data= await response.json();
+            setUser(data);
+        }
+        getUser();
+    });
+
+    async function handleOrderSubmit(event){
+        event.preventDefault();
+        const order={
+            cartList: cartList,
+            amount_paid: total,
+            quantity: cartList.length,
+            user:{
+                name: event.target.name.value,
+                email: event.target.email.value,
+                id: userID
+            }
+        }
+
+        const response= await fetch("http://localhost:8000/660/orders",{
+            method: "POST",
+            headers: {"Content-Type":"application/json", Authorization:`Bearer ${token}`},
+            body: JSON.stringify(order)
+        });
+        const data= await response.json();
+        clearCart();
+        navigate("/");
+      }
+
+
     return (
         <section>
             <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
@@ -40,7 +87,7 @@ export const Checkout = ({ setCheckout }) => {
                                 <i className="bi bi-credit-card mr-2"></i>CARD
                                 PAYMENT
                             </h3>
-                            <form className="space-y-6">
+                            <form onSubmit={handleOrderSubmit} className="space-y-6">
                                 <div>
                                     <label
                                         htmlFor="name"
@@ -53,7 +100,7 @@ export const Checkout = ({ setCheckout }) => {
                                         name="name"
                                         id="name"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white"
-                                        value={"Undefined"}
+                                        value={user.name || "undefined"}
                                         disabled
                                         required=""
                                     />
@@ -70,7 +117,7 @@ export const Checkout = ({ setCheckout }) => {
                                         name="email"
                                         id="email"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white"
-                                        value={"backup@example.com"}
+                                        value={user.email || "user@example.com"}
                                         disabled
                                         required=""
                                     />
@@ -130,7 +177,7 @@ export const Checkout = ({ setCheckout }) => {
                                         name="code"
                                         id="code"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white"
-                                        value="523"
+                                        value="5233"
                                         disabled
                                         required=""
                                     />
