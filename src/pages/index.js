@@ -14,5 +14,9 @@ export { OrderSuccess } from "./Order/components/OrderSuccess";
 export { OrderFail } from "./Order/components/Orderfail";
 export { OrderPage } from "./Order/OrderPage";
 
+export {DashboardCard} from "./Dashboard/components/DashboardCard";
+export {DashboardEmpty} from "./Dashboard/components/DashboardEmpty";
+export {DashboardPage} from "./Dashboard/DashboardPage";
+
 export { ProductDetail } from "./ProductDetail";
 export { PageNotFound } from "./PageNotFound";

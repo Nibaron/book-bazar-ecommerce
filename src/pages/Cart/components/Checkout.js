@@ -4,50 +4,59 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../../../context";
 
 export const Checkout = ({ setCheckout }) => {
-    const  {cartList, total, clearCart}=useCart();
-    const navigate= useNavigate();
+    const { cartList, total, clearCart } = useCart();
+    const navigate = useNavigate();
     const [user, setUser] = useState({});
     const token = JSON.parse(sessionStorage.getItem("token"));
-    const userID= JSON.parse(sessionStorage.getItem("userID"));
+    const userID = JSON.parse(sessionStorage.getItem("userID"));
 
-
-    useEffect(()=>{
-        
-        async function getUser(){
-            const response= await fetch(`http://localhost:8000/600/users/${userID}`,
-            {
-                method:"GET",
-                headers: {"Content-Type":"application/json", Authorization:`Bearer ${token}`},
-            });
-            const data= await response.json();
+    useEffect(() => {
+        async function getUser() {
+            const response = await fetch(
+                `http://localhost:8000/600/users/${userID}`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            const data = await response.json();
             setUser(data);
         }
         getUser();
     });
 
-    async function handleOrderSubmit(event){
+    async function handleOrderSubmit(event) {
         event.preventDefault();
-        const order={
-            cartList: cartList,
-            amount_paid: total,
-            quantity: cartList.length,
-            user:{
-                name: user.name,
-                email: user.email,
-                id: userID
-            }
+        try {
+            const order = {
+                cartList: cartList,
+                amount_paid: total,
+                quantity: cartList.length,
+                user: {
+                    name: user.name,
+                    email: user.email,
+                    id: userID,
+                },
+            };
+
+            const response = await fetch("http://localhost:8000/660/orders", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(order),
+            });
+            const data = await response.json();
+            clearCart();
+            navigate("/order-summary", { state: { status: true, data: data } });
+        } catch {
+            navigate("/order-summary", { state: { status: false } });
         }
-
-        const response= await fetch("http://localhost:8000/660/orders",{
-            method: "POST",
-            headers: {"Content-Type":"application/json", Authorization:`Bearer ${token}`},
-            body: JSON.stringify(order)
-        });
-        const data= await response.json();
-        clearCart();
-        navigate("/order-summary" ,{state: {status: true, data: data }});
-      }
-
+    }
 
     return (
         <section>
@@ -87,7 +96,10 @@ export const Checkout = ({ setCheckout }) => {
                                 <i className="bi bi-credit-card mr-2"></i>CARD
                                 PAYMENT
                             </h3>
-                            <form onSubmit={handleOrderSubmit} className="space-y-6">
+                            <form
+                                onSubmit={handleOrderSubmit}
+                                className="space-y-6"
+                            >
                                 <div>
                                     <label
                                         htmlFor="name"

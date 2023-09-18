@@ -6,7 +6,6 @@ import { OrderFail } from "./components/Orderfail";
 export const OrderPage = () => {
   useTitle("Order Page");
   
-
   const { state } = useLocation();
 
   return (
