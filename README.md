@@ -1,30 +1,13 @@
-# Getting Started with Create React App
+# CodeBook Ecommerce WebSite
+<image src="./homepage.png">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# REQUIREMENTS
+* First clone the Repo using `https://github.com/Nibaron/book-bazar-ecommerce.git`
+*  install all dependency and packages using `npm install`
+* create a .env file with `REACT_APP_HOST=http://localhost:8000`
+* open a powershell and run `npx json-server data/db.json -m ./node_modules/json-server-auth -r data/routes.json --port 8000` 
+* congrats your backend is running now.
+* Then open another terminal and run `npm start` to start 
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Your app is ready to run, ENJOY!
