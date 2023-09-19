@@ -2,60 +2,38 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useCart } from "../../../context";
+import { createOrder, getUser } from "../../../services";
+import { toast } from "react-toastify";
 
 export const Checkout = ({ setCheckout }) => {
     const { cartList, total, clearCart } = useCart();
     const navigate = useNavigate();
     const [user, setUser] = useState({});
-    const token = JSON.parse(sessionStorage.getItem("token"));
-    const userID = JSON.parse(sessionStorage.getItem("userID"));
-
+  
     useEffect(() => {
-        async function getUser() {
-            const response = await fetch(
-                `http://localhost:8000/600/users/${userID}`,
-                {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-            const data = await response.json();
-            setUser(data);
-        }
-        getUser();
-    });
-
-    async function handleOrderSubmit(event) {
-        event.preventDefault();
-        try {
-            const order = {
-                cartList: cartList,
-                amount_paid: total,
-                quantity: cartList.length,
-                user: {
-                    name: user.name,
-                    email: user.email,
-                    id: userID,
-                },
-            };
-
-            const response = await fetch("http://localhost:8000/660/orders", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(order),
-            });
-            const data = await response.json();
-            clearCart();
-            navigate("/order-summary", { state: { status: true, data: data } });
-        } catch {
-            navigate("/order-summary", { state: { status: false } });
-        }
+      async function fetchData(){
+          try{
+              const data = await getUser();
+              setUser(data);
+          } catch(error){
+              toast.error(error.message, { closeButton: false, position: "top-center" });
+          }        
+      }
+      fetchData();
+    }, []);
+  
+    async function handleOrderSubmit(event){
+      event.preventDefault();
+      
+      try {
+        const data = await createOrder({cartList, total, user});
+          clearCart();
+          navigate("/order-summary", { state: {status: true, data: data} });
+      } 
+      catch(error) {
+          toast.error(error.message, { closeButton: false, position: "top-center" });
+          navigate("/order-summary", { state: {status: false} });
+      }
     }
 
     return (
