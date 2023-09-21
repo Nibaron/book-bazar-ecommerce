@@ -1,6 +1,8 @@
 # CodeBook Ecommerce WebSite
 <image src="./homepage.png">
 
+https://github.com/Nibaron/book-bazar-ecommerce/assets/36547410/5e978d61-bf57-412e-a890-7e79e7141383
+
 
 # REQUIREMENTS
 * First clone the Repo using `https://github.com/Nibaron/book-bazar-ecommerce.git`
