@@ -5,7 +5,7 @@ export const Hero = () => {
         <section className="flex flex-col lg:flex-row dark:text-slate-100 items-center">
             <div className="text my-5">
                 <h1 className="text-5xl font-bold">The Ultimate eBook Store</h1>
-                <p className="text-2xl my-7 px-1 dark:text-slate-300">
+                <p className="text-2xl text-justify my-7 px-2 dark:text-slate-300">
                     The CodeBook is the world's most popular and authoritative
                     source for computer science ebooks. Find ratings and also
                     access to the newest books digitally.
@@ -18,7 +18,7 @@ export const Hero = () => {
                     Explore eBooks
                 </Link>
             </div>
-            <div className="visual my-5 lg:max-w-xl">
+            <div className="visual my-5 mx-1 lg:max-w-xl">
                 <img
                     className="rounded-lg max-h-full"
                     src={heroImg}

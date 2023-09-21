@@ -1,24 +1,31 @@
-import { useNavigate } from "react-router-dom";
-import { useTitle } from "../hooks";
+import { useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { register } from "../services";
 
-export const Register = () => {
-    useTitle("register");
-    const navigate= useNavigate();
+import { useTitle } from "../hooks";
 
-    async function handleregister(event){
+export const Register = () => {
+    const name = useRef();
+    const email = useRef();
+    const password = useRef();
+    
+    useTitle("Register");
+    const navigate = useNavigate();
+
+    async function handleRegisterSubmit(event) {
         event.preventDefault();
 
-        const authDetail={
-            name: event.target.name.value,
-            email: event.target.email.value,
-            password: event.target.password.value
-        }
+        const authDetail = {
+            name: name.current.value,
+            email: email.current.value,
+            password: password.current.value,
+        };
 
-        const data= await register(authDetail);
-        data.accessToken ? navigate("/login"):toast.error(data);
+        const data = await register(authDetail);
+        data.accessToken ? navigate("/login") : toast.error(data);
     }
+
     return (
         <main>
             <section>
@@ -26,7 +33,7 @@ export const Register = () => {
                     Register
                 </p>
             </section>
-            <form onSubmit={handleregister}>
+            <form onSubmit={handleRegisterSubmit}>
                 <div className="mb-6">
                     <label
                         htmlFor="name"
@@ -35,8 +42,9 @@ export const Register = () => {
                         Your name
                     </label>
                     <input
-                        type="name"
+                        type="text"
                         id="name"
+                        ref={name}
                         className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                         placeholder="Nibaron Kumar"
                         required
@@ -53,6 +61,7 @@ export const Register = () => {
                     <input
                         type="email"
                         id="email"
+                        ref={email}
                         className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                         placeholder="nibaron@example.com"
                         required
@@ -69,6 +78,7 @@ export const Register = () => {
                     <input
                         type="password"
                         id="password"
+                        ref={password}
                         className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                         required
                         minLength="7"
@@ -81,6 +91,16 @@ export const Register = () => {
                     Register
                 </button>
             </form>
+            <p className="mt-4 text-center text-black dark:text-white">
+                Already have an account?{" "}
+                <Link
+                    to="/login"
+                    className="text-blue-700 hover:underline"
+                >
+                    Log in
+                </Link>
+                .
+            </p>
         </main>
     );
 };
