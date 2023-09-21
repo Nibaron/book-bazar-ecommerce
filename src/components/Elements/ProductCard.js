@@ -4,7 +4,7 @@ import { useCart } from "../../context";
 import { useEffect, useState } from "react";
 
 export const ProductCard = ({ product }) => {
-    const { id, name, overview, price, poster, rating, best_seller } = product;
+    const { id, name, overview, price, poster, rating, best_seller, in_stock } = product;
     const [inCart, setInCart] = useState(false);
     const { cartList, addToCart, removeFromCart } = useCart();
 
@@ -20,6 +20,11 @@ export const ProductCard = ({ product }) => {
                 {best_seller && (
                     <span className="absolute top-4 left-2 px-2 bg-orange-500 bg-opacity-90 text-white rounded">
                         Best Seller
+                    </span>
+                )}
+                {!in_stock && (
+                    <span className="absolute top-4 left-2 px-2 bg-red-500 bg-opacity-90 text-white rounded">
+                        Out of Stock
                     </span>
                 )}
                 <img

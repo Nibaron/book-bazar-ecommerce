@@ -107,7 +107,7 @@ export const ProductDetail = () => {
                                 </button>
                             )}
                         </p>
-                        <p className="text-lg text-gray-900 dark:text-slate-200">
+                        <p className="text-lg text-gray-900 text-justify dark:text-slate-200">
                             {product.long_description}
                         </p>
                     </div>

@@ -46,7 +46,7 @@ export const FilterBar = ({ setShow }) => {
                     <ul className="text-slate-700 dark:text-slate-100">
                         <li className="mt-1 mb-5">
                             <p className="font-semibold my-1">Sort by</p>
-                            <div className="flex items-center my-1">
+                            <div className="flex items-center my-1 mx-1">
                                 <input
                                     onChange={() =>
                                         dispatch({
@@ -70,7 +70,7 @@ export const FilterBar = ({ setShow }) => {
                                     Price - Low to High
                                 </label>
                             </div>
-                            <div className="flex items-center my-1">
+                            <div className="flex items-center my-1 mx-1">
                                 <input
                                     onChange={() =>
                                         dispatch({
@@ -97,7 +97,7 @@ export const FilterBar = ({ setShow }) => {
                         </li>
                         <li className="mt-1 mb-5">
                             <span className="font-semibold">Rating</span>
-                            <div className="flex items-center my-1">
+                            <div className="flex items-center my-1 mx-1">
                                 <input
                                     onChange={() =>
                                         dispatch({
@@ -121,7 +121,7 @@ export const FilterBar = ({ setShow }) => {
                                     4 Stars & Above
                                 </label>
                             </div>
-                            <div className="flex items-center my-1">
+                            <div className="flex items-center my-1 mx-1">
                                 <input
                                     onChange={() =>
                                         dispatch({
@@ -145,7 +145,7 @@ export const FilterBar = ({ setShow }) => {
                                     3 Stars & Above
                                 </label>
                             </div>
-                            <div className="flex items-center my-1">
+                            <div className="flex items-center my-1 mx-1">
                                 <input
                                     onChange={() =>
                                         dispatch({
@@ -169,7 +169,7 @@ export const FilterBar = ({ setShow }) => {
                                     2 Stars & Above
                                 </label>
                             </div>
-                            <div className="flex items-center my-1">
+                            <div className="flex items-center my-1 mx-1">
                                 <input
                                     onChange={() =>
                                         dispatch({
@@ -196,7 +196,7 @@ export const FilterBar = ({ setShow }) => {
                         </li>
                         <li className="mt-1 mb-5">
                             <span className="font-semibold">Other Filters</span>
-                            <div className="flex items-center my-1">
+                            <div className="flex items-center my-1 mx-1">
                                 <input
                                     onChange={() =>
                                         dispatch({
@@ -220,7 +220,7 @@ export const FilterBar = ({ setShow }) => {
                                     Best Seller Only
                                 </label>
                             </div>
-                            <div className="flex items-center my-1">
+                            <div className="flex items-center my-1 mx-1">
                                 <input
                                     onChange={() =>
                                         dispatch({
